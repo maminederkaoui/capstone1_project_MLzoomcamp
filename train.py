@@ -8,6 +8,11 @@ import pickle
 
 df = pd.read_csv("data/stress_detection.csv")
 
+# Keeping only the features having more than a 1% correlation score with PSS_score
+columns_to_keep = ['PSS_score', 'Conscientiousness', 'Extraversion', 'Neuroticism', 'sleep_time', 'sleep_duration', 'PSQI_score', 'num_calls', 'num_sms', 'skin_conductance', 'mobility_distance']
+df = df[columns_to_keep]
+
+# Renaming columns
 df.columns = df.columns.str.lower()
 
 df_full_train, df_test = train_test_split (df, test_size = 0.20, random_state = 10)
@@ -30,8 +35,8 @@ dtest = xgb.DMatrix(X_test, label = y_test, feature_names = features)
 watchlist = [(dfull_train, 'full_train'), (dtest, 'test')]
 
 xgb_params = {
-    'eta': 0.1, 
-    'max_depth': 3,
+    'eta': 0.05, 
+    'max_depth': 10,
     'min_child_weight': 1,
     
     'objective': 'reg:squarederror',
@@ -40,7 +45,7 @@ xgb_params = {
     'seed': 1,
     'verbosity': 1,
 }
-model = xgb.train(xgb_params, dfull_train, num_boost_round= 4,
+model = xgb.train(xgb_params, dfull_train, num_boost_round= 11,
                 evals=watchlist)
 
 y_pred = model.predict(dtest)

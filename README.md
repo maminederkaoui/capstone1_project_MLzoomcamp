@@ -27,8 +27,26 @@ The attributes measured are :
 ## Problem to solve
 
 Stress can be caused by many events and related to specific sets of human attributes.
-<br>My goal through this project is to predict the PSS_score (stress levels) based on behavioral, psychological, and physiological variables like sleep, mobility, phone usage, and personality traits.
+<br>My goal through this project is to predict the PSS_score (stress level) based on behavioral, psychological, and physiological variables like sleep, mobility, phone usage, and personality traits.
 <br>The model should help people control their stress level through an application, once it gets the user's attributes data. The application should afterwards give advices and recommendations to the user.
 
 ## Instructions on how to run the project
-TO-DO
+
+### Installing the dependecies in a virtual environment
+With the Pipfile, you can install the necessary dependencies in a virtual environnement for the project following these steps :
+- step 1 : install pipenv with bash command : 
+  - pip install pipenv
+- step 2 : Navigate to the Project Directory and exactly where the Pipfile is located
+- step 3 : Run the following command to install dependencies specified in the Pipfile and create the virtual environment
+  <br>*command to execute in bash or terminal* : 
+  - pipenv install
+
+### Containerization using Dockerfile
+With the DockerFile, you can launch the application in docker container with its dependencies defined in the Pipefile. 
+<br>The steps to follow are :
+- step 1 : launch Docker Desktop application
+- step 2 : Navigate to the Project Directory and exactly where the Dockerfile is located
+- step 3 : Run the following command to create the image using the Dockerfile : 
+  - docker build -t capstone1_image .
+- step 4 : Run the following command to create and run a container using the created docker image : 
+  - docker run -it --rm -p 9696:9696 capstone1_image
